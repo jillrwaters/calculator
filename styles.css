@@ -1,9 +1,80 @@
+body {
+    background-color: black;
+    padding-top: 10vh;
+    font-family: "syne mono"
+}
+
 #wrapper {
-    /* display: flex;
-    flex-direction: column; */
-    width: 25vw;
+    width: 35vw;
+    margin: auto;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    grid-template-columns: repeat(3, 1fr);
+    border: 5px hotpink solid;
+    border-radius: 7px;
 }
 
 .display {
-    background-color:darkgrey
+    background-color: lightgrey;
+    color: rgb(0, 0, 49);
+    text-align: right;
+    grid-area: 1/1/2/4;
+    font-size: 3rem;
+    padding-right: .5rem;
+    margin: -5px;
+    border: 9px hotpink solid;
+    border-radius: 15px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column: 1/4;
+    grid-gap: 3px;
+    background-color: hotpink;
+    padding: 5px;
+}
+
+button {
+    border-radius: 7px;
+    border: none;
+    font-family: "syne mono";
+}
+
+button:hover {
+    background-color: white;
+}
+
+button:active {
+    background-color: yellow;
+}
+
+.number,
+.decimal {
+    background-color: black;
+    color: greenyellow;
+    font-size: 3rem;
+
+}
+
+.operator {
+    background-color: black;
+    color: aqua;
+    font-size: 2rem;
+}
+
+.zero {
+    grid-area: 4/1/5/3;
+}
+
+#equals {
+    grid-area: 5/1/6/3;
+    color: blueviolet;
+    font-size: 3rem;
+}
+
+#add {
+    grid-column: 3/5;
+
 }
