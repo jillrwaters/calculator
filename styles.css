@@ -1,17 +1,18 @@
 body {
-    background-color: black;
+    background-color: rgb(65, 64, 64);
     padding-top: 10vh;
     font-family: "syne mono"
 }
 
 #wrapper {
-    width: 35vw;
+    width: 300px;
     margin: auto;
     display: grid;
     grid-template-rows: 1fr 5fr;
     grid-template-columns: repeat(3, 1fr);
     border: 5px hotpink solid;
     border-radius: 7px;
+    box-shadow: 1px 5px 100px rgb(103, 150, 153);
 }
 
 .display {
