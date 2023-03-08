@@ -1,8 +1,9 @@
 // constants
 const BUTTONS = [...document.querySelectorAll("button")]
-const NUMBER_BUTTONS =  [...document.querySelectorAll("button .numbers")]
+const NUMBERS_DIV = document.querySelector(".numbers")
 const DISPLAY = document.querySelector("#display")
 const OPERATORS = [...document.querySelectorAll(".operators")]
+let displayValue = 0
 
 // basic math functions
 
@@ -23,10 +24,5 @@ const divide = (a, b) => {
 }
 
 const operate = (func, a, b) => {
-    return func(a,b)
-}
-
-const populateNumButtons = () => {
-    
-
+    return func(a, b)
 }
