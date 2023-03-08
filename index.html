@@ -21,8 +21,8 @@
             <button onclick="showNumber(8)" class="number" id="8">8</button>
             <button onclick="showNumber(9)" class="number" id="9">9</button>
 
-            <button onclick="clearEverything()" class="operator" id="clear">CE</button>
-
+            <button onclick="storeOperand('+')" class="operator" id="add">+</button>
+            
             <button onclick="showNumber(4)" class="number" id="4">4</button>
             <button onclick="showNumber(5)" class="number" id="5">5</button>
             <button onclick="showNumber(6)" class="number" id="6">6</button>
@@ -39,8 +39,11 @@
 
             <button class="decimal" id="decimal">.</button>
             <button onclick="storeOperand('/')" class="operator" id="divide">/</button>
-            <button onclick="storeOperand('+')" class="operator" id="add">+</button>
+
+            <button onclick="clearEverything()" class="operator" id="clear">CE</button>
             <button onclick="operate(currentOperator)" class="operator" id="equals">=</button>
+
+            
 
         </div>
 

@@ -76,13 +76,11 @@ button:active {
     font-size: 3rem;
 }
 
-#add {
+#clear {
     grid-column: 3/5;
 
-}
-.c {
-    
-}
+} 
+
 p {
 position: absolute; 
     bottom: 0;
