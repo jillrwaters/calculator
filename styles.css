@@ -1,7 +1,8 @@
 body {
     background-color: rgb(65, 64, 64);
     padding-top: 10vh;
-    font-family: "syne mono"
+    font-family: "syne mono";
+    margin: 0;
 }
 
 #wrapper {
@@ -78,4 +79,17 @@ button:active {
 #add {
     grid-column: 3/5;
 
+}
+.c {
+    
+}
+p {
+position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem;
+    background-color: black;
+    color: green;
+    margin: 0;
+    text-align: center;
 }
