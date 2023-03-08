@@ -3,7 +3,9 @@ const BUTTONS = [...document.querySelectorAll("button")]
 const NUMBERS_DIV = document.querySelector(".numbers")
 const DISPLAY = document.querySelector("#display")
 const OPERATORS = [...document.querySelectorAll(".operators")]
-let displayValue = 0
+let displayValue
+let operandA
+let operandB
 
 // basic math functions
 
