@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(65, 64, 64);
+    background-color: blueviolet;
     padding-top: 10vh;
     font-family: "syne mono";
     margin: 0;
@@ -13,7 +13,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     border: 5px hotpink solid;
     border-radius: 7px;
-    box-shadow: 1px 5px 100px rgb(103, 150, 153);
+    /* box-shadow: 1px 5px 100px rgb(103, 150, 153); */
 }
 
 .display {
