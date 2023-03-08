@@ -54,11 +54,16 @@ const showNumber = (num) => {
     // need function to stop displaying numbers after 11 digits
 }
 
+
+
 const clearEverything = () => {
-    displayValue = "0"
+    displayValue = ""
     DISPLAY.textContent = "0"
+    currentOperator = ""
     operandA = ""
     operandB = ""
+
+    console.log(`CLEARED => operandA: ${operandA} | operandB: ${operandB} | currentOperator: ${currentOperator}`)
 }
 
 const ADD = new Operator(ADD_BTN, "+", add)
@@ -70,21 +75,45 @@ const storeOperand = (btn) => {
     displayValue = DISPLAY.textContent
     currentOperator = btn
 
-    !operandA ? operandA = displayValue : operandB = displayValue;
+    !operandA ? operandA = parseInt(displayValue) : operandB = parseInt(displayValue);
+
 
     DISPLAY.textContent = "0"
 
 }
 
 
-const operate = (op, a, b) => {
-    operandB = displayValue
+const operate = (op) => {
 
-    console.log(`operandA: ${operandA} | operandB: ${operandB} | currentOperator: ${currentOperator}`)
+    if (!operandB) {
+        operandB = parseInt(DISPLAY.textContent)
+    }
+    let answer
 
-    
+    switch (op) {
+        case "+":
+            DISPLAY.textContent = `${add(operandA, operandB)}`;
+            break;
+        case "-":
+            DISPLAY.textContent = `${subtract(operandA, operandB)}`;
+            break;
+        case "*":
+            DISPLAY.textContent = `${multiply(operandA, operandB)}`;
+            break;
+        case "/":
+            DISPLAY.textContent = `${divide(operandA, operandB)}`;
+            break;
+    }
+
+
+
+    console.log(`EQUALS => operandA: ${operandA} | operandB: ${operandB} | currentOperator: ${currentOperator}`)
+
+
 
     op = currentOperator
-    DISPLAY.textContent = `${a} ${op} ${b}`
+    // DISPLAY.textContent = `${operandA} ${op} ${operandB} = ${answer}`
 }
+
+
 
