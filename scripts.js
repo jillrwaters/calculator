@@ -10,12 +10,15 @@ const DIVIDE_BTN = document.querySelector("#divide")
 const EQUALS_BTN = document.querySelector("#equals")
 
 
-let currentOperator
+let operatorA
+let operatorB
+
 
 let displayValue = DISPLAY.textContent
 
 let operandA
 let operandB
+
 
 
 // basic math functions
@@ -48,17 +51,17 @@ const showNumber = (num) => {
 const clearEverything = () => {
     displayValue = ""
     DISPLAY.textContent = "0"
-    currentOperator = ""
+    operatorA = ""
     operandA = ""
     operandB = ""
 
-    console.log(`CLEARED => operandA: ${operandA} | operandB: ${operandB} | currentOperator: ${currentOperator}`)
+    // console.log(`CLEARED => operandA: ${operandA} | operandB: ${operandB} | operatorA: ${operatorA}`)
 }
 
 const storeOperand = (btn) => {
     displayValue = DISPLAY.textContent
-    currentOperator = btn
-
+    operatorA = btn
+    
     !operandA ? operandA = parseFloat(displayValue) : operandB = parseFloat(displayValue);
 
 
@@ -73,13 +76,12 @@ let roundTwoDecimals = (num) => {
     return Math.round((num + Number.EPSILON) * 100) / 100
    
 }
-    
-
 
 const operate = (op) => {
     if (!operandB) {
         operandB = parseFloat(DISPLAY.textContent)
     }
+
 
     switch (op) {
         case "+":
@@ -95,6 +97,10 @@ const operate = (op) => {
             DISPLAY.textContent = `${roundTwoDecimals(divide(operandA, operandB))}`;
             break;
     }
+
+    
+
+    console.log(`operandA: ${operandA} | operandB: ${operandB}`)
 
 
     // display entire expression? DISPLAY.textContent = `${operandA} ${op} ${operandB} = ${answer}`
