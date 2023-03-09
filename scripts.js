@@ -59,32 +59,40 @@ const storeOperand = (btn) => {
     displayValue = DISPLAY.textContent
     currentOperator = btn
 
-    !operandA ? operandA = parseInt(displayValue) : operandB = parseInt(displayValue);
+    !operandA ? operandA = parseFloat(displayValue) : operandB = parseFloat(displayValue);
 
 
     DISPLAY.textContent = "0"
-
 }
+
+let isInt =(n) => {
+    return n % 1 === 0;
+ }
+
+let roundTwoDecimals = (num) => {
+    return Math.round((num + Number.EPSILON) * 100) / 100
+   
+}
+    
 
 
 const operate = (op) => {
     if (!operandB) {
-        operandB = parseInt(DISPLAY.textContent)
+        operandB = parseFloat(DISPLAY.textContent)
     }
-    let answer
 
     switch (op) {
         case "+":
-            DISPLAY.textContent = `${add(operandA, operandB)}`;
+            DISPLAY.textContent = `${roundTwoDecimals(add(operandA, operandB))}`;
             break;
         case "-":
-            DISPLAY.textContent = `${subtract(operandA, operandB)}`;
+            DISPLAY.textContent = `${roundTwoDecimals(subtract(operandA, operandB))}`;
             break;
         case "*":
-            DISPLAY.textContent = `${multiply(operandA, operandB)}`;
+            DISPLAY.textContent = `${roundTwoDecimals(multiply(operandA, operandB))}`;
             break;
         case "/":
-            DISPLAY.textContent = `${divide(operandA, operandB)}`;
+            DISPLAY.textContent = `${roundTwoDecimals(divide(operandA, operandB))}`;
             break;
     }
 
