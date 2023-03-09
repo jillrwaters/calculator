@@ -9,11 +9,6 @@ const MULTIPLY_BTN = document.querySelector("#multiply")
 const DIVIDE_BTN = document.querySelector("#divide")
 const EQUALS_BTN = document.querySelector("#equals")
 
-function Operator(selector, symbol, method) {
-    this.selector = selector
-    this.symbol = symbol
-    this.method = method
-}
 
 let currentOperator
 
@@ -42,19 +37,13 @@ const divide = (a, b) => {
 }
 
 
-
 // populate display with number clicks
 
-
 const showNumber = (num) => {
-    (DISPLAY.textContent === "0") ? DISPLAY.textContent = `${num}` : DISPLAY.textContent += `${num}`;
-
-
-    console.log(`${num}`)
-    // need function to stop displaying numbers after 11 digits
+    if (DISPLAY.textContent.length < 11) {
+        DISPLAY.textContent === "0" ? DISPLAY.textContent = `${num}` : DISPLAY.textContent += `${num}`;
+    }
 }
-
-
 
 const clearEverything = () => {
     displayValue = ""
@@ -65,11 +54,6 @@ const clearEverything = () => {
 
     console.log(`CLEARED => operandA: ${operandA} | operandB: ${operandB} | currentOperator: ${currentOperator}`)
 }
-
-const ADD = new Operator(ADD_BTN, "+", add)
-const SUBTRACT = new Operator(SUBTRACT_BTN, "-", subtract)
-const MULTIPLY = new Operator(MULTIPLY_BTN, "*", multiply)
-const DIVIDE = new Operator(DIVIDE_BTN, "-", divide)
 
 const storeOperand = (btn) => {
     displayValue = DISPLAY.textContent
@@ -84,7 +68,6 @@ const storeOperand = (btn) => {
 
 
 const operate = (op) => {
-
     if (!operandB) {
         operandB = parseInt(DISPLAY.textContent)
     }
@@ -106,13 +89,7 @@ const operate = (op) => {
     }
 
 
-
-    console.log(`EQUALS => operandA: ${operandA} | operandB: ${operandB} | currentOperator: ${currentOperator}`)
-
-
-
-    op = currentOperator
-    // DISPLAY.textContent = `${operandA} ${op} ${operandB} = ${answer}`
+    // display entire expression? DISPLAY.textContent = `${operandA} ${op} ${operandB} = ${answer}`
 }
 
 
