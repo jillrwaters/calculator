@@ -5,8 +5,7 @@ const testResults = () => {
 }
 const inputNum = (entry) => {
     let data = entry.textContent
-    let screen = ""
-    if (screen.length < 11) SCREEN.textContent === "0" ? SCREEN.textContent = entry : SCREEN.textContent += entry 
+    if ((SCREEN.textContent).length < 11) SCREEN.textContent === "0" ? SCREEN.textContent = entry : SCREEN.textContent += entry 
 }
 
 const updateDisplay = (data) => {
