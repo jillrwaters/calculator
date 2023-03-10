@@ -14,7 +14,7 @@ let operatorA
 let operatorB
 
 
-let displayValue = DISPLAY.textContent
+let dV = DISPLAY.textContent
 
 let operandA
 let operandB
@@ -39,43 +39,67 @@ const divide = (a, b) => {
     return a / b
 }
 
-
-// populate display with number clicks
-
-const showNumber = (num) => {
-    if (DISPLAY.textContent.length < 11) {
-        DISPLAY.textContent === "0" ? DISPLAY.textContent = `${num}` : DISPLAY.textContent += `${num}`;
-    }
+const testResults = () => {
+    console.log(`operandA: ${operandA} | operandB: ${operandB} | operatorA: ${operatorA} | operatorB: ${operatorB} | dV: ${dV} | `)
 }
 
+
+/
+// -------------------- replace this function with updateDisplay()
+// const showNumber = (num) => {
+//     if (DISPLAY.textContent.length < 11) {
+//         DISPLAY.textContent === "0" ? DISPLAY.textContent = `${num}` : DISPLAY.textContent += `${num}`;
+//     }
+// }
+// ------------------ ^ replace this function with updateDisplay() ^
+
+
+// ------------------------------------- change screen info
+const updateDisplay = (info) => {
+    // triggered inside another function after storing info or doing calculation
+    if (DISPLAY.textContent.length < 11) {
+        DISPLAY.textContent === "0" ? DISPLAY.textContent = `${info}` : DISPLAY.textContent += `${info}`;
+    }
+}
+// ^ NEW FUNCTION ^
+
 const clearEverything = () => {
-    displayValue = ""
+    dV = ""
     DISPLAY.textContent = "0"
     operatorA = ""
     operandA = ""
     operandB = ""
-
-    // console.log(`CLEARED => operandA: ${operandA} | operandB: ${operandB} | operatorA: ${operatorA}`)
 }
+// -------------------------------------- ^ change screen info ^
 
-const storeOperand = (btn) => {
-    displayValue = DISPLAY.textContent
+
+// -------------------------------------- store operands 
+
+const newOpd = (btn) => {
+    // triggered when any operand is pressed. stores last operand pressed
+    dV = DISPLAY.textContent
     operatorA = btn
-    
-    !operandA ? operandA = parseFloat(displayValue) : operandB = parseFloat(displayValue);
-
-
-    DISPLAY.textContent = "0"
+    !operandA ? operandA = parseFloat(dV) : operandB = parseFloat(dV);
 }
+// ^ EDITING FUNCTION  ^
 
-let isInt =(n) => {
+const newOpt = (btn) => {
+    // store number that has been input so far, trigger when any operand is pressed
+} 
+
+// ^ NEW FUNCTION ^
+// -------------------------------------- ^ store operands ^
+
+const isInt =(n) => {
     return n % 1 === 0;
  }
 
-let roundTwoDecimals = (num) => {
+const roundTwoDecimals = (num) => {
     return Math.round((num + Number.EPSILON) * 100) / 100
-   
 }
+
+
+// --------------------------------------
 
 const operate = (op) => {
     if (!operandB) {
@@ -97,14 +121,12 @@ const operate = (op) => {
             DISPLAY.textContent = `${roundTwoDecimals(divide(operandA, operandB))}`;
             break;
     }
-
-    
-
-    console.log(`operandA: ${operandA} | operandB: ${operandB}`)
-
+testResults()
 
     // display entire expression? DISPLAY.textContent = `${operandA} ${op} ${operandB} = ${answer}`
 }
+
+// -----------------------------------------
 
 
 
