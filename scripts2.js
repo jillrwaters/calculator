@@ -8,7 +8,7 @@ const inputNum = (entry) => {
     if ((SCREEN.textContent).length < 11) SCREEN.textContent === "0" ? SCREEN.textContent = entry : SCREEN.textContent += entry 
 }
 
-const updateDisplay = (data) => {
+const updateSCREEN = (data) => {
     SCREEN.textContent = `${data}`
 }
 
@@ -17,7 +17,7 @@ const clearEverything = () => {
     opdB = ""
     optA = ""
     optB = ""
-    updateDisplay('0')
+    updateSCREEN('0')
     operationExecuted = false
 }
 
@@ -25,7 +25,7 @@ let opdA
 let opdB
 const newOpd = (data) => {
     !opdA ? opdA = SCREEN.textContent : opdB = SCREEN.textContent
-    updateDisplay('0')
+    updateSCREEN('0')
     newOpt(data)
     testResults()
 }
@@ -67,16 +67,16 @@ const operate = (op, a, b) => {
 
     switch (op) {
         case "+":
-            DISPLAY.textContent = `${roundTwoDecimals(add(a, b))}`;
+            SCREEN.textContent = `${roundTwoDecimals(add(a, b))}`;
             break;
         case "-":
-            DISPLAY.textContent = `${roundTwoDecimals(subtract(a, b))}`;
+            SCREEN.textContent = `${roundTwoDecimals(subtract(a, b))}`;
             break;
         case "*":
-            DISPLAY.textContent = `${roundTwoDecimals(multiply(a, b))}`;
+            SCREEN.textContent = `${roundTwoDecimals(multiply(a, b))}`;
             break;
         case "/":
-            DISPLAY.textContent = `${roundTwoDecimals(divide(a, b))}`;
+            SCREEN.textContent = `${roundTwoDecimals(divide(a, b))}`;
             break;
     }
 
