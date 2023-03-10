@@ -1,5 +1,5 @@
 // constants
-const DISPLAY = document.querySelector(".display")
+const DISPLAY = document.querySelector(".screen")
 // operators
 let optA
 let optB

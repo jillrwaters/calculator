@@ -16,7 +16,7 @@ body {
     box-shadow: 1px 5px 100px black; 
 }
 
-.display {
+.screen {
     background-color: lightgrey;
     color: rgb(0, 0, 49);
     text-align: right;
