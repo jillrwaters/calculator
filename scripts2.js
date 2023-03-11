@@ -26,7 +26,7 @@ const clearEverything = () => {
 
 
 const newOpd = () => {
-    operands.push(SCREEN.textContent)
+    operands.push(parseFloat(SCREEN.textContent))
     updateScreen('')
 
 
@@ -44,6 +44,7 @@ let opdB
 let opt
 
 const calculate = () => {
+    // newOpd()
     for (let i=0;i<operands.length;i++){
         for (let t in operators){
             opdA = operands[i]
@@ -52,9 +53,10 @@ const calculate = () => {
             operands.shift()
             opt = operators[i]
             operators.shift()
-            operate(opt, opdA, opdB)
+           
         }
-    }
+    operate(opt, opdA, opdB)
+    } 
 
     
     console.log(operands, operators)
