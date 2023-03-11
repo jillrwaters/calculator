@@ -26,6 +26,7 @@ body {
     margin: -5px;
     border: 9px hotpink solid;
     border-radius: 15px;
+    height: 4rem;
 }
 
 .buttons {

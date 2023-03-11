@@ -1,39 +1,83 @@
 const SCREEN = document.querySelector(".screen")
+let operands = []
+let operators = []
 
 const testResults = () => {
-    console.log(`opdA: ${opdA} | opdB: ${opdB} | optA: ${optA} | optB: ${optB} | SCREEN.textContent: ${SCREEN.textContent}`)
+    console.log(`operands: ${[operands]} | operators: ${[operators]}`)
 }
 const inputNum = (entry) => {
     let data = entry.textContent
-    if ((SCREEN.textContent).length < 11) SCREEN.textContent === "0" ? SCREEN.textContent = entry : SCREEN.textContent += entry 
+    if ((SCREEN.textContent).length < 11) SCREEN.textContent === "0" ? SCREEN.textContent = entry : SCREEN.textContent += entry
 }
 
-const updateSCREEN = (data) => {
+const updateScreen = (data) => {
     SCREEN.textContent = `${data}`
 }
 
 const clearEverything = () => {
-    opdA = ""
-    opdB = ""
-    optA = ""
-    optB = ""
-    updateSCREEN('0')
+    updateScreen('0')
     operationExecuted = false
-}
-
-let opdA
-let opdB
-const newOpd = (data) => {
-    !opdA ? opdA = SCREEN.textContent : opdB = SCREEN.textContent
-    updateSCREEN('0')
-    newOpt(data)
+    operands = []
+    operators = []
+    expression = []
     testResults()
 }
 
-let optA
-let optB
+
+
+const newOpd = () => {
+    operands.push(SCREEN.textContent)
+    updateScreen('')
+
+
+    testResults()
+}
+
+
 const newOpt = (data) => {
-    !optA ? optA = data : optB = data
+    operators.push(data)
+
+}
+let opdA
+let opdB
+
+let opt
+
+const calculate = () => {
+    for (let i=0;i<operands.length;i++){
+        for (let t in operators){
+            opdA = operands[i]
+            operands.shift()
+            opdB = operands[i]
+            operands.shift()
+            opt = operators[i]
+            operators.shift()
+            operate(opt, opdA, opdB)
+        }
+    }
+
+    
+    console.log(operands, operators)
+    
+}
+
+
+const operate = (op, a, b) => {
+    switch (op) {
+        case "+":
+            SCREEN.textContent = `${roundTwoDecimals(add(a, b))}`;
+            break;
+        case "-":
+            SCREEN.textContent = `${roundTwoDecimals(subtract(a, b))}`;
+            break;
+        case "*":
+            SCREEN.textContent = `${roundTwoDecimals(multiply(a, b))}`;
+            break;
+        case "/":
+            SCREEN.textContent = `${roundTwoDecimals(divide(a, b))}`;
+            break;
+    }
+
 }
 
 const add = (a, b) => {
@@ -52,33 +96,10 @@ const divide = (a, b) => {
     return a / b
 }
 
-const isInt =(n) => {
+const isInt = (n) => {
     return n % 1 === 0;
- }
+}
 
 const roundTwoDecimals = (num) => {
     return Math.round((num + Number.EPSILON) * 100) / 100
-}
-
-let operationExecuted = false
-const operate = (op, a, b) => {
-    if (operationExecuted){ optB(op) }
-
-
-    switch (op) {
-        case "+":
-            SCREEN.textContent = `${roundTwoDecimals(add(a, b))}`;
-            break;
-        case "-":
-            SCREEN.textContent = `${roundTwoDecimals(subtract(a, b))}`;
-            break;
-        case "*":
-            SCREEN.textContent = `${roundTwoDecimals(multiply(a, b))}`;
-            break;
-        case "/":
-            SCREEN.textContent = `${roundTwoDecimals(divide(a, b))}`;
-            break;
-    }
-
-    operationExecuted = true
 }
