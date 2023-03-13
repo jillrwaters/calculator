@@ -3,15 +3,21 @@ let operands = []
 let operators = []
 
 const testResults = () => {
-    console.table(`operands: ${[operands]} | operators: ${[operators]} | operands[0]: ${operands[0]}`)
+    console.table(`operands: ${[operands]} | operators: ${[operators]} | operands[0]: ${operands[0]} | currentOperator: ${currentOperator}`)
 }
 
 const hasDecimal = (data) => {
     return Array.from(SCREEN.textContent.toString()).includes(".")
 }
+const hasOperator = (data) => {
+    let ops = ['+','-','*','/']
+    ops.forEach(function(op){
+        if (data.includes(op)) return true
+    })
+}
 
 const inputNum = (entry) => {
-    if ((SCREEN.textContent).length < 11)
+    if ((SCREEN.textContent).length < 11){
         if (entry === "."){
             if (!hasDecimal(SCREEN.textContent))  SCREEN.textContent += entry
         }
@@ -21,6 +27,10 @@ const inputNum = (entry) => {
         else {
             SCREEN.textContent += entry
         }
+    }
+    else if (hasOperator(data)){
+        updateScreen(`${SCREEN.textContent.slice(1)}`)
+    }
 
 }
 
@@ -39,23 +49,29 @@ const clearEverything = () => {
 
 
 
-const newOpd = () => {
+// const newOpd = () => {
+    
+//     updateScreen('0')
+// }
+
+let currentOperator = ''
+
+
+const handleOperator = (op) => {
     operands.push(parseFloat(SCREEN.textContent))
-    updateScreen('')
-    return operands
+    operators.push(op)
+    updateScreen(op)
+    
+    if(operands.length > 1) updateScreen(calculate(operands, operators))
+    
+
+    console.log(operands)
+
+
+
 
     testResults()
 }
-
-
-const newOpt = (data) => {
-    if (data !== "=") {
-        operators.push(data)
-    }
-    return operators
-    testResults()
-}
-
 
 const calculate = (numArray, symbolArray) => {
     let result = 0
@@ -65,57 +81,78 @@ const calculate = (numArray, symbolArray) => {
             let next = numArray[1]
             let operator = symbolArray[0]
 
-            operate(operator, previous, next)
+            result = operate(operator, previous, next)
 
-            operators = symbolArray.slice(1)
+            symbolArray = symbolArray.slice(1)
             numArray = numArray.slice(2)
             numArray.unshift(result)
         }
     }
-    SCREEN.textContent = `${numArray[0]}`
-
-
+    return result
 }
-
 
 const operate = (op, a, b) => {
     switch (op) {
         case "+":
-            SCREEN.textContent = `${roundTwoDecimals(add(a, b))}`;
+            return a + b;
             break;
         case "-":
-            SCREEN.textContent = `${roundTwoDecimals(subtract(a, b))}`;
+            return a - b;
             break;
         case "*":
-            SCREEN.textContent = `${roundTwoDecimals(multiply(a, b))}`;
+            return a * b;
             break;
         case "/":
-            SCREEN.textContent = `${roundTwoDecimals(divide(a, b))}`;
+            return a / b;
             break;
     }
 
 }
 
-const add = (a, b) => {
-    return a + b
-}
 
-const subtract = (a, b) => {
-    return a - b
-}
 
-const multiply = (a, b) => {
-    return a * b
-}
 
-const divide = (a, b) => {
-    return a / b
-}
 
-const isInt = (n) => {
-    return n % 1 === 0;
-}
 
-const roundTwoDecimals = (num) => {
-    return Math.round((num + Number.EPSILON) * 100) / 100
-}
+
+// const operate = (op, a, b) => {
+//     switch (op) {
+//         case "+":
+//             SCREEN.textContent = `${roundTwoDecimals(add(a, b))}`;
+//             break;
+//         case "-":
+//             SCREEN.textContent = `${roundTwoDecimals(subtract(a, b))}`;
+//             break;
+//         case "*":
+//             SCREEN.textContent = `${roundTwoDecimals(multiply(a, b))}`;
+//             break;
+//         case "/":
+//             SCREEN.textContent = `${roundTwoDecimals(divide(a, b))}`;
+//             break;
+//     }
+
+// }
+
+// const add = (a, b) => {
+//     return a + b
+// }
+
+// const subtract = (a, b) => {
+//     return a - b
+// }
+
+// const multiply = (a, b) => {
+//     return a * b
+// }
+
+// const divide = (a, b) => {
+//     return a / b
+// }
+
+// const isInt = (n) => {
+//     return n % 1 === 0;
+// }
+
+// const roundTwoDecimals = (num) => {
+//     return Math.round((num + Number.EPSILON) * 100) / 100
+// }
