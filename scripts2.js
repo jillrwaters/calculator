@@ -3,26 +3,25 @@ let operands = []
 let operators = []
 
 const testResults = () => {
-    console.table(`operands: ${[operands]} | operators: ${[operators]} | expression: ${{expression}}`)
+    console.table(`operands: ${[operands]} | operators: ${[operators]} | operands[0]: ${operands[0]}`)
 }
 
-const hasDecimal = () => {
+const hasDecimal = (data) => {
     return Array.from(SCREEN.textContent.toString()).includes(".")
 }
 
 const inputNum = (entry) => {
-    let data = entry.textContent
-    // if (SCREEN.classList.contains(".calculated")){
-    //     SCREEN.textContent = ""
-    // }
-    if (entry || (entry === "." && !hasDecimal())) {
-        if ((SCREEN.textContent).length < 11) SCREEN.textContent === "0" ? SCREEN.textContent = entry : SCREEN.textContent += entry
+    if ((SCREEN.textContent).length < 11)
+        if (entry === "."){
+            if (!hasDecimal(SCREEN.textContent))  SCREEN.textContent += entry
+        }
+        else if (SCREEN.textContent === "0") {
+            updateScreen(entry)
+        }
+        else {
+            SCREEN.textContent += entry
+        }
 
-    }
-
-    testResults()
-
-    // if operate hasn't already run
 }
 
 const updateScreen = (data) => {
@@ -43,41 +42,38 @@ const clearEverything = () => {
 const newOpd = () => {
     operands.push(parseFloat(SCREEN.textContent))
     updateScreen('')
-
+    return operands
 
     testResults()
 }
 
 
 const newOpt = (data) => {
-    if (data !== "="){
-    operators.push(data)
+    if (data !== "=") {
+        operators.push(data)
     }
+    return operators
     testResults()
 }
-let opdA
-let opdB
 
-let opt
-let expression = []
 
-const calculate = () => {
+const calculate = (numArray, symbolArray) => {
     let result = 0
-    for (let i=0;i<operands.length;i++){
-    for (let k=0;k<operators.length;k++){
-        let previous = operands[0]
-        let next = operands[1]
-        let operator = operators[0]
-        
-        operate(operator, previous, next)
+    for (let i = 0; i < numArray.length; i++) {
+        for (let k = 0; k < symbolArray.length; k++) {
+            let previous = numArray[0]
+            let next = numArray[1]
+            let operator = symbolArray[0]
 
-        operators = operators.slice(1)
-        operands = operands.slice(2)
-        operands.unshift(result)
+            operate(operator, previous, next)
+
+            operators = symbolArray.slice(1)
+            numArray = numArray.slice(2)
+            numArray.unshift(result)
+        }
     }
-}
-    SCREEN.textContent = `${operands[0]}`
-   
+    SCREEN.textContent = `${numArray[0]}`
+
 
 }
 
