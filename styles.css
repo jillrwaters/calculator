@@ -13,7 +13,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     border: 5px hotpink solid;
     border-radius: 7px;
-    box-shadow: 1px 5px 100px black; 
+    box-shadow: 1px 5px 100px black;
 }
 
 .screen {
@@ -61,7 +61,8 @@ button:active {
 
 }
 
-.operator {
+.operator
+ {
     background-color: black;
     color: aqua;
     font-size: 2rem;
@@ -71,19 +72,23 @@ button:active {
     grid-area: 4/1/5/3;
 }
 
-#equals {
+.equals {
+    background-color: black;
     grid-area: 5/1/6/3;
     color: blueviolet;
     font-size: 3rem;
 }
 
-#clear {
+.clear {
+    background-color: black;
+    color: white;
+    font-size: 3rem;
     grid-column: 3/5;
 
-} 
+}
 
 p {
-position: absolute; 
+    position: absolute;
     bottom: 0;
     width: 100%;
     height: 1.5rem;
