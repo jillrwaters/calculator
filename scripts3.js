@@ -1,16 +1,39 @@
 const SCREEN = document.querySelector(".screen")
 const NUMBERS = Array.from(document.querySelectorAll(".number"))
+
+
+const hasDecimal = (data) => {
+    return Array.from(SCREEN.textContent.toString()).includes(".")
+}
 // add event listeners to number buttons
 NUMBERS.forEach(function (num) {
     num.addEventListener("click", function (e) {
-        if (SCREEN.textContent == 0) {
-            SCREEN.textContent = e.target.textContent
+
+        if ((SCREEN.textContent).length < 11){
+           if (SCREEN.textContent == 0) {
+                SCREEN.textContent = e.target.textContent
+            }
+            else if (SCREEN.textContent === '0.'){
+                console.log("what in the everloving FUCK")
+                SCREEN.textContent = `0.${e.target.textContent}`
+            }
+            else {
+                SCREEN.textContent += `${e.target.textContent}`
+            }
         }
-        else {
-            SCREEN.textContent += `${e.target.textContent}`
-        }
+
     })
 })
+
+// handle decimals
+const DECIMAL = document.querySelector(".decimal")
+DECIMAL.addEventListener("click", function(e){
+        if (!hasDecimal(SCREEN.textContent))  {   
+            SCREEN.textContent += `${e.target.textContent}`
+        }
+})
+
+
 // update the screen
 const updateScreen = (data) => {
     SCREEN.textContent = `${data}`
@@ -37,7 +60,7 @@ OPERATORS.forEach(function (op) {
         operands.push(SCREEN.textContent)
         // push operator pressed to operators
         operators.push(e.target.textContent)
-        updateScreen('0')
+        updateScreen('')
         testing()
 
 
@@ -53,6 +76,8 @@ const testing = () => {
 const EQUALS = document.querySelector(".equals")
 // add event listener to equals button
 EQUALS.addEventListener("click", function (e) {
+    operands.push(SCREEN.textContent)
+    testing()
     calculateOne()
     // handle more than 2 operands
     if (operands.length > 2) {
@@ -62,8 +87,8 @@ EQUALS.addEventListener("click", function (e) {
 
 // perform simple calculation with 2 operands only
 const calculateOne = () => {
-    operands.push(SCREEN.textContent)
-    updateScreen(operate(operators[0], operands[0], operands[1]))
+    // operands.push(SCREEN.textContent)
+    updateScreen(operate(operators[0], operands.slice(-2)[0], operands.slice(-1)))
 }
 
 // perform string of calculations with multiple operators and operands
@@ -73,8 +98,8 @@ const calculateMultiple = (numArray, symbolArray) => {
     for (let i = 0; i < numArray.length; i++) {
         // iterate over operators
         for (let k = 0; k < symbolArray.length; k++) {
-            let previous = numArray[0]
-            let next = numArray[1]
+            let previous = numArray.slice(-2)[0]
+            let next = numArray.slice(-1)
             let operator = symbolArray[0]
 
             result = operate(operator, previous, next)
@@ -94,16 +119,20 @@ const operate = (op, a, b) => {
     b = parseFloat(b)
     switch (op) {
         case "+":
-            return a + b;
+            return roundTwoDecimals(a + b);
             break;
         case "-":
-            return a - b;
+            return roundTwoDecimals(a - b);
             break;
         case "*":
-            return a * b;
+            return roundTwoDecimals(a * b);
             break;
         case "/":
-            return a / b;
+            return roundTwoDecimals(a / b);
             break;
     }
+}
+
+const roundTwoDecimals = (num) => {
+    return Math.round((num + Number.EPSILON) * 100) / 100
 }
