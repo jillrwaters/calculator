@@ -1,28 +1,28 @@
 // constants
-const NUMBERS_DIV = document.querySelector(".numbers")
-const DISPLAY = document.querySelector(".display")
+const DISPLAY = document.querySelector(".screen")
+// operators
+let optA
+let optB
+// display value
+let dV = DISPLAY.textContent
+// operands
+let opdA
+let opdB
 
-const BUTTONS = [...document.querySelectorAll("button")]
-const ADD_BTN = document.querySelector("#add")
-const SUBTRACT_BTN = document.querySelector("#subtract")
-const MULTIPLY_BTN = document.querySelector("#multiply")
-const DIVIDE_BTN = document.querySelector("#divide")
-const EQUALS_BTN = document.querySelector("#equals")
+// -------------------------------- NEW OBJECT - BELOW
 
+let info = {
+    opdA: "",
+    opdB: "",
+    optA: "",
+    optB: ","
+}
 
-let operatorA
-let operatorB
-
-
-let displayValue = DISPLAY.textContent
-
-let operandA
-let operandB
+// ------------------------------- ^ NEW OBJECT ^
 
 
 
-// basic math functions
-
+// -------------------- math functions 
 const add = (a, b) => {
     return a + b
 }
@@ -39,72 +39,92 @@ const divide = (a, b) => {
     return a / b
 }
 
-
-// populate display with number clicks
-
-const showNumber = (num) => {
-    if (DISPLAY.textContent.length < 11) {
-        DISPLAY.textContent === "0" ? DISPLAY.textContent = `${num}` : DISPLAY.textContent += `${num}`;
-    }
-}
-
-const clearEverything = () => {
-    displayValue = ""
-    DISPLAY.textContent = "0"
-    operatorA = ""
-    operandA = ""
-    operandB = ""
-
-    // console.log(`CLEARED => operandA: ${operandA} | operandB: ${operandB} | operatorA: ${operatorA}`)
-}
-
-const storeOperand = (btn) => {
-    displayValue = DISPLAY.textContent
-    operatorA = btn
-    
-    !operandA ? operandA = parseFloat(displayValue) : operandB = parseFloat(displayValue);
-
-
-    DISPLAY.textContent = "0"
-}
-
-let isInt =(n) => {
+const isInt =(n) => {
     return n % 1 === 0;
  }
 
-let roundTwoDecimals = (num) => {
+const roundTwoDecimals = (num) => {
     return Math.round((num + Number.EPSILON) * 100) / 100
-   
+}
+// ------------------- ^ math functions ^
+
+const testResults = () => {
+    console.log(`opdA: ${opdA} | opdB: ${opdB} | optA: ${optA} | optB: ${optB} | dV: ${dV} | `)
 }
 
+
+
+// ------------------------------------- change screen info - below -------------------------------------------------- keep
+// -------------------- replace function below with updateDisplay() ?
+const inputNum = (num) => {
+    if (DISPLAY.textContent.length < 11) { // if less than 11 chars, check following:
+        DISPLAY.textContent === "0" ? DISPLAY.textContent = `${num}` : DISPLAY.textContent += `${num}`;
+    }
+}
+// ------------------ ^ replace function with updateDisplay() ? no. keep the same ^
+const updateDisplay = (info) => {
+    // triggered inside another function after storing info or doing calculation
+    DISPLAY.textContent = `${info}`
+}
+// ^ NEW FUNCTION ^
+const clearEverything = () => {
+    dV = ""
+    DISPLAY.textContent = "0"
+    optA = ""
+    opdA = ""
+    opdB = ""
+}
+// -------------------------------------- ^ change screen info ^ --------------------------------------------------- ^ keep ^
+
+
+// -------------------------------------- store info - below
+
+const newOpd = (btn) => {
+    // triggered when [?]. stores last operand pressed
+    let final = '' // return value = newest operand stored ???
+    dV = DISPLAY.textContent // 
+    optA = btn
+    !opdA ? opdA = parseFloat(dV) : opdB = parseFloat(dV);
+    // the new operand is what and is stored where???
+}
+// ^ EDITING FUNCTION  ^
+
+const newOpt = (btn) => {
+    // store number that has been input so far, trigger when any operand is pressed
+} 
+
+// ^ NEW FUNCTION ^
+// -------------------------------------- ^ store info ^
+
+
+// --------------------------------------
+
 const operate = (op) => {
-    if (!operandB) {
-        operandB = parseFloat(DISPLAY.textContent)
+    if (!opdB) {
+        opdB = parseFloat(DISPLAY.textContent)
     }
 
 
     switch (op) {
         case "+":
-            DISPLAY.textContent = `${roundTwoDecimals(add(operandA, operandB))}`;
+            DISPLAY.textContent = `${roundTwoDecimals(add(opdA, opdB))}`;
             break;
         case "-":
-            DISPLAY.textContent = `${roundTwoDecimals(subtract(operandA, operandB))}`;
+            DISPLAY.textContent = `${roundTwoDecimals(subtract(opdA, opdB))}`;
             break;
         case "*":
-            DISPLAY.textContent = `${roundTwoDecimals(multiply(operandA, operandB))}`;
+            DISPLAY.textContent = `${roundTwoDecimals(multiply(opdA, opdB))}`;
             break;
         case "/":
-            DISPLAY.textContent = `${roundTwoDecimals(divide(operandA, operandB))}`;
+            DISPLAY.textContent = `${roundTwoDecimals(divide(opdA, opdB))}`;
             break;
     }
+testResults()
 
-    
-
-    console.log(`operandA: ${operandA} | operandB: ${operandB}`)
-
-
-    // display entire expression? DISPLAY.textContent = `${operandA} ${op} ${operandB} = ${answer}`
+    // display entire expression? DISPLAY.textContent = `${opdA} ${op} ${opdB} = ${answer}`
 }
+
+// -----------------------------------------
 
 
 

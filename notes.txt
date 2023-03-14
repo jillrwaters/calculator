@@ -1,0 +1,86 @@
+FUNCTIONS:
+
+*math: [add, subtract, multiply, divide, roundTwoDecimals, isInt, operate]
+
+-operate:
+    -PURPOSE: perform whatever operation according to the data that has been stored so far and show it on the screen
+    -LOGIC:
+        - if operation has already executed?
+        - use relevant math function on 2 parameters
+    -VARIABLES:
+        - operands
+        - operator(s)
+        - ?
+        - updateDisplay
+    TRIGGER: when equals sign is pressed?
+    RETURN: show result on screen
+------------------------------------------------
+*change screen info: [inputNum, updateDisplay, clearEverything]
+-----------
+-inputNum:
+    -PURPOSE: show numbers on the screen as they are being pressed, up to 11 digits
+    -LOGIC: 
+        - if the screen says zero, replace with last digit pressed
+        - if screen is not zero AND there are less than 11 digits on the screen, append digit
+    -VARIABLES:
+        - display value
+
+    -TRIGGER: when any number key is pressed
+    -RETURN: ?
+-----------
+updateDisplay: 
+    -PURPOSE: change display to new value
+    -LOGIC:
+        - whatever is entered as the parameter will be displayed on the screen
+    -VARIABLES:
+        - ?
+    -TRIGGER:
+        - when called inside a function
+    -RETURN: new display value?
+-----------
+clearEverything:
+    -PURPOSE: clear all relevant variables
+    -LOGIC: ?
+    -VARIABLES: 
+        - display value
+        - all operators and operands
+    -TRIGGER: when 'CE' button is pressed
+    -RETURN: none
+--------------------------------------------------
+*store info: [newOpd, newOpt]
+-----------
+- newOpd:
+    -PURPOSE: stores new operand to a variable, depending on logic
+    -LOGIC: 
+        - variable operand is stored to depends on operands that are already stored or not. assign to next available operand.
+        - if equals sign has already been pressed and screen not cleared? or operate function has already run. 
+    -VARIABLES:
+            - answer? - the last answer that was stored as a result of running operate()
+            - opdA - fill if empty | move on if not
+            - opdB - fill if empty
+            - storedOperands? - list of stored operands 
+    -TRIGGER: ?
+    -RETURN: ? just store the operand ?
+-----------
+- newOpt:
+    -PURPOSE: stores new operator to variable depending on logic
+    -LOGIC: variable it is stored to depends on what has already been stored.
+        - has the equals sign already been pressed?? or operate() already been run?
+            - if operate already ran?
+            - if not?
+        - variables:
+            - optA - fill if empty | move on if not
+            - optB - fill if empty
+    -TRIGGER: when any operator is pressed
+----------------
+expression(?) - takes multiple parameters and performs calculations based on parameters. pass 2 at a time into operate()????
+
+
+
+
+
+
+
+
+
+
