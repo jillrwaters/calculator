@@ -9,13 +9,9 @@ const hasDecimal = (data) => {
 NUMBERS.forEach(function (num) {
     num.addEventListener("click", function (e) {
 
-        if ((SCREEN.textContent).length < 11){
-           if (SCREEN.textContent == 0) {
+        if ((SCREEN.textContent).length < 11) {
+            if (SCREEN.textContent == 0) {
                 SCREEN.textContent = e.target.textContent
-            }
-            else if (SCREEN.textContent === '0.'){
-                console.log("what in the everloving FUCK")
-                SCREEN.textContent = `0.${e.target.textContent}`
             }
             else {
                 SCREEN.textContent += `${e.target.textContent}`
@@ -27,10 +23,10 @@ NUMBERS.forEach(function (num) {
 
 // handle decimals
 const DECIMAL = document.querySelector(".decimal")
-DECIMAL.addEventListener("click", function(e){
-        if (!hasDecimal(SCREEN.textContent))  {   
-            SCREEN.textContent += `${e.target.textContent}`
-        }
+DECIMAL.addEventListener("click", function (e) {
+    if (!hasDecimal(SCREEN.textContent)) {
+        SCREEN.textContent = `${e.target.textContent}`
+    }
 })
 
 
